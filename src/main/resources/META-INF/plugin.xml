@@ -1,0 +1,26 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>ru.qa.megagenerator.ai-assistant</id>
+    <name>ai-assistant</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="author@mail.com">Company name</vendor>
+    <description><![CDATA[
+        Description of plugin
+    ]]></description>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="ru.qa.megagenerator.toolWindows.optimize.OptimizeToolWindowFactory"
+                    anchor="right"
+                    factoryClass="ru.qa.megagenerator.toolWindows.optimize.OptimizeToolWindowFactory"/>
+        <!--                icon="/icons/ai.svg"-->
+        canCloseContents="false"/>
+    </extensions>
+    <actions>
+        <action id="OptimizeCodeAction" class="ru.qa.megagenerator.features.common.action.OptimizeCodeAction"
+                text="Оптимизировать код" description="Оптимизация выделенного кода при помощи AI">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Cut"/>
+        </action>
+    </actions>
+</idea-plugin>

@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  deepseek:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ollama-deepseek:latest
+    container_name: ollama-deepseek
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    entrypoint: >
+      /bin/bash -c "
+         echo '💡 Starting Ollama server in background...';
+         ollama serve & 
+         SERVER_PID=$!;
+         echo '⏳ Waiting for server to be ready...';
+         for i in $(seq 1 20); do
+           curl -fsS http://localhost:11434/api/version && break || sleep 1;
+         done;
+         echo '⬇️ Pulling DeepSeek model...';
+         ollama pull deepseek-coder:latest;
+         echo '✅ Model pulled, keeping server running...';
+         wait $SERVER_PID
+        "
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:11434/api/tags || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
