@@ -3,5 +3,5 @@
 /workspace.xml
 
 /build
-/idea
+/.idea
 **/ollama-*.tgz
