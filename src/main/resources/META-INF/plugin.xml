@@ -11,14 +11,14 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="ru.qa.megagenerator.toolWindows.optimize.OptimizeToolWindowFactory"
+        <toolWindow id="ru.qa.megagenerator.aiAssistant.toolWindows.optimize.OptimizeToolWindowFactory"
                     anchor="right"
-                    factoryClass="ru.qa.megagenerator.toolWindows.optimize.OptimizeToolWindowFactory"/>
+                    factoryClass="ru.qa.megagenerator.aiAssistant.toolWindows.optimize.OptimizeToolWindowFactory"/>
         <!--                icon="/icons/ai.svg"-->
         canCloseContents="false"/>
     </extensions>
     <actions>
-        <action id="OptimizeCodeAction" class="ru.qa.megagenerator.features.common.action.OptimizeCodeAction"
+        <action id="OptimizeCodeAction" class="ru.qa.megagenerator.aiAssistant.features.common.action.OptimizeCodeAction"
                 text="Оптимизировать код" description="Оптимизация выделенного кода при помощи AI">
             <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Cut"/>
         </action>

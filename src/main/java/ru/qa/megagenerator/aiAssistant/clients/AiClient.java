@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.clients;
+package ru.qa.megagenerator.aiAssistant.clients;
 
 public class AiClient {
 

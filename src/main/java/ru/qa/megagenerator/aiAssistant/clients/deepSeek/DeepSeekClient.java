@@ -1,9 +1,9 @@
-package ru.qa.megagenerator.clients.deepSeek;
+package ru.qa.megagenerator.aiAssistant.clients.deepSeek;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.qa.megagenerator.clients.deepSeek.dto.DeepSeekRequest;
-import ru.qa.megagenerator.clients.deepSeek.dto.DeepSeekResponse;
-import ru.qa.megagenerator.features.common.interfaces.AIProvider;
+import ru.qa.megagenerator.aiAssistant.clients.deepSeek.dto.DeepSeekRequest;
+import ru.qa.megagenerator.aiAssistant.clients.deepSeek.dto.DeepSeekResponse;
+import ru.qa.megagenerator.aiAssistant.features.common.interfaces.AIProvider;
 
 import java.net.URI;
 import java.net.http.HttpClient;

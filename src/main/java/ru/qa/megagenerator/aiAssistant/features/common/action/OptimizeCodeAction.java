@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.features.common.action;
+package ru.qa.megagenerator.aiAssistant.features.common.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -7,8 +7,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
-import ru.qa.megagenerator.features.common.core.AIManager;
-import ru.qa.megagenerator.toolWindows.optimize.OptimizeToolWindowPanel;
+import ru.qa.megagenerator.aiAssistant.toolWindows.optimize.OptimizeToolWindowPanel;
 
 public class OptimizeCodeAction extends AnAction {
 
