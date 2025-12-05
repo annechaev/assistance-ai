@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.aiAssistant.features.common.interfaces;
+package ru.qa.megagenerator.aiAssistant.old.common.interfaces;
 
 public interface AIProvider {
 

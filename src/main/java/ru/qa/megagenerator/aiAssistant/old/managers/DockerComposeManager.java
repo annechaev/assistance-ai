@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.aiAssistant.managers;
+package ru.qa.megagenerator.aiAssistant.old.managers;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;

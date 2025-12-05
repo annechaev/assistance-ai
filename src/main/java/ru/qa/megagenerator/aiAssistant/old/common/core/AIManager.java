@@ -1,6 +1,6 @@
-package ru.qa.megagenerator.aiAssistant.features.common.core;
+package ru.qa.megagenerator.aiAssistant.old.common.core;
 
-import ru.qa.megagenerator.aiAssistant.features.common.interfaces.AIProvider;
+import ru.qa.megagenerator.aiAssistant.old.common.interfaces.AIProvider;
 
 public class AIManager {
     private static AIProvider activeProvider;

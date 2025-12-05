@@ -1,9 +1,9 @@
-package ru.qa.megagenerator.aiAssistant.toolWindows.optimize;
+package ru.qa.megagenerator.aiAssistant.old.optimize;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
-import ru.qa.megagenerator.aiAssistant.enums.OptimizationType;
+import ru.qa.megagenerator.aiAssistant.old.enums.OptimizationType;
 
 import javax.swing.*;
 import java.awt.*;

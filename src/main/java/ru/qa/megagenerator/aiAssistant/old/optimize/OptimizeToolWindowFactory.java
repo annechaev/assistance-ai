@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.aiAssistant.toolWindows.optimize;
+package ru.qa.megagenerator.aiAssistant.old.optimize;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;

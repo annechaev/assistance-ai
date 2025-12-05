@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.aiAssistant.clients.deepSeek.dto;
+package ru.qa.megagenerator.aiAssistant.old;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

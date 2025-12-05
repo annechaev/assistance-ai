@@ -1,4 +1,4 @@
-package ru.qa.megagenerator.aiAssistant.clients.deepSeek.dto;
+package ru.qa.megagenerator.aiAssistant.old;
 
 import java.util.List;
 import java.util.Map;
