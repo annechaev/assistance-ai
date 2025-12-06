@@ -3,7 +3,6 @@ package ru.qa.megagenerator.aiAssistant.utils.form;
 import ru.qa.megagenerator.aiAssistant.enums.MessageBubbleOrientationType;
 import ru.qa.megagenerator.aiAssistant.items.BubbleMessageItem;
 
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;

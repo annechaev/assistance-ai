@@ -3,13 +3,13 @@ package ru.qa.megagenerator.aiAssistant.form;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import ru.qa.megagenerator.aiAssistant.items.MessageListPanel;
+import ru.qa.megagenerator.aiAssistant.utils.form.ContextMenuUtils;
+import ru.qa.megagenerator.aiAssistant.utils.form.TextAreaUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import ru.qa.megagenerator.aiAssistant.items.ChatMessagePanel;
-import ru.qa.megagenerator.aiAssistant.utils.form.ContextMenuUtils;
-import ru.qa.megagenerator.aiAssistant.utils.form.TextAreaUtils;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SimpleChatForm extends JPanel {
     private JPanel root;
@@ -24,7 +24,7 @@ public class SimpleChatForm extends JPanel {
     private JButton systemButton;
     private JLabel systemLabel;
     private Project project;
-    private JPanel messagesPanel;
+    private MessageListPanel messagesPanel;
     private JScrollPane messagesScrollPane;
     private Editor editor;
 
@@ -48,9 +48,7 @@ public class SimpleChatForm extends JPanel {
 
     private void addMessage(String text, boolean isUser) {
         if(text.isBlank()) return;
-        ChatMessagePanel messagePanel = new ChatMessagePanel(text, isUser, messagesPanel, project);
-        messagesPanel.add(messagePanel);
-        messagesPanel.add(Box.createVerticalStrut(5));
+        messagesPanel.addMessage(text, isUser, project);
         messagesPanel.revalidate();
         messagesPanel.repaint();
         SwingUtilities.invokeLater(() -> {

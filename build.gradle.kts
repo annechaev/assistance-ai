@@ -2,7 +2,7 @@ import org.jetbrains.changelog.ChangelogPluginExtension
 
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.17.2"
+    id("org.jetbrains.intellij.platform") version "2.10.5"
     id("org.jetbrains.changelog") version "2.2.0"
 }
 
@@ -13,7 +13,7 @@ java {
 }
 
 group = "ru.qa.megagenerator"
-version = "0.0.0"
+
 // Настраиваем changelog-плагин
 val changelogExtension = extensions.getByType(ChangelogPluginExtension::class)
 changelogExtension.apply {
@@ -22,55 +22,61 @@ changelogExtension.apply {
     groups.set(emptyList())
 }
 
-// Ручной парсинг CHANGELOG.md — получаем последнюю версию
+// Чекаем последнюю версию из CHANGELOG.md
 val pluginVersion = providers.provider {
-    val changelogFile = file("CHANGELOG.md")
-    val lines = changelogFile.readLines()
     val regex = Regex("""^## \[(\d+\.\d+\.\d+)] - \d{4}-\d{2}-\d{2}""")
-
-    val version = lines
-        .firstNotNullOfOrNull { line -> regex.matchEntire(line)?.groupValues?.get(1) }
+    file("CHANGELOG.md")
+        .readLines()
+        .firstNotNullOfOrNull { regex.matchEntire(it)?.groupValues?.get(1) }
         ?: error("No valid changelog version found")
-
-    version
 }
 
 version = pluginVersion.get()
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
-
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
-intellij {
-    pluginName.set("ai-assistant")
-    version.set("2024.1")
-    type.set("IC") // Target IDE Platform
-    plugins.set(listOf("com.intellij.java"))
-}
-
-configurations {create("externalLibs")}
 
 dependencies {
-
+    intellijPlatform {
+        intellijIdeaCommunity("2025.2")
+    }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(17)
+intellijPlatform {
+    pluginConfiguration {
+        id = "MG AI Assistent"
+        version = pluginVersion.get()
+
+//        ideaVersion {
+//            sinceBuild = "252.*"
+//            untilBuild = "252.*"
+//        }
+    }
+}
+
+configurations {
+    create("externalLibs")
+}
+
+dependencies {
+    // externalLibs("...") — если потребуется
 }
 
 tasks {
 
-    // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "17"
         targetCompatibility = "17"
+        options.release.set(17)
     }
 
     patchPluginXml {
-        version.set(pluginVersion)
-        sinceBuild.set("241")
+        sinceBuild.set("252")    // IC-252.23892.409 → compatible
+        untilBuild.set("252.*")
     }
 
     signPlugin {
@@ -84,8 +90,6 @@ tasks {
     }
 
     runIde {
-        jvmArgs = listOf(
-            "-Dfile.encoding=UTF-8"
-        )
+        jvmArgs = listOf("-Dfile.encoding=UTF-8")
     }
 }

@@ -1,8 +1,8 @@
 package ru.qa.megagenerator.aiAssistant.old.optimize;
 
 import ru.qa.megagenerator.aiAssistant.old.DeepSeekClient;
-import ru.qa.megagenerator.aiAssistant.old.enums.OptimizationType;
 import ru.qa.megagenerator.aiAssistant.old.common.interfaces.AIProvider;
+import ru.qa.megagenerator.aiAssistant.old.enums.OptimizationType;
 
 public class CodeOptimizer {
 
