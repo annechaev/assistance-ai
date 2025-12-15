@@ -32,7 +32,7 @@ public class MessageListPanel extends JPanel implements Scrollable {
 
     public void addMessage(String messageText, boolean isUser, Project project) {
         int maxWidth = (int)(getWidth() * 0.8);
-        List<JPanel> rows = ChatMessagePanel.getRows(messageText, isUser, this, project, maxWidth);
+        List<JPanel> rows = ChatMessagePanel.getRows(messageText, isUser, project, maxWidth);
         rows.forEach(row -> {
             add(row);
             add(Box.createVerticalStrut(5));

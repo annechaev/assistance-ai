@@ -6,18 +6,29 @@
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="author@mail.com">Company name</vendor>
     <description><![CDATA[
-        Description of plugin
+        This is ai assistance for different model
     ]]></description>
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="MG AI Chat"
                     factoryClass="ru.qa.megagenerator.aiAssistant.toolWindow.ChatToolWindowFactory" anchor="right"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="ru.qa.megagenerator.aiAssistant.settings.configurable.CommonListConfigurable"
+                                 id="ru.qa.megagenerator.aiAssistant.settings.configurable.CommonListConfigurable"
+                                 displayName="MG AI Assistant"/>
+        <applicationConfigurable parentId="ru.qa.megagenerator.aiAssistant.settings.configurable.CommonListConfigurable"
+                                 id="ru.qa.megagenerator.aiAssistant.settings.configurable.ModelConfigurable"
+                                 instance="ru.qa.megagenerator.aiAssistant.settings.configurable.ModelConfigurable"
+                                 displayName="Model"/>
+        <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.aiModels.ChatGPTModel"/>
+        <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.aiModels.DeepSeekModel"/>
+        <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.clients.DeepSeekClient"/>
     </extensions>
     <actions>
-        <action id="OptimizeCodeAction" class="ru.qa.megagenerator.aiAssistant.old.common.action.OptimizeCodeAction"
-                text="Оптимизировать код" description="Оптимизация выделенного кода при помощи AI">
-            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Cut"/>
-        </action>
+<!--        <action id="OptimizeCodeAction" class="ru.qa.megagenerator.aiAssistant.old.common.action.OptimizeCodeAction"-->
+<!--                text="Оптимизировать код" description="Оптимизация выделенного кода при помощи AI">-->
+<!--            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Cut"/>-->
+<!--        </action>-->
     </actions>
 </idea-plugin>

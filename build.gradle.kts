@@ -63,7 +63,7 @@ configurations {
 }
 
 dependencies {
-    // externalLibs("...") — если потребуется
+    implementation("org.reflections:reflections:0.10.2")
 }
 
 tasks {

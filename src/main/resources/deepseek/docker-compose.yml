@@ -23,7 +23,8 @@ services:
            curl -fsS http://localhost:11434/api/version && break || sleep 1;
          done;
          echo '⬇️ Pulling DeepSeek model...';
-         ollama pull deepseek-coder:latest;
+         ollama pull deepseek-coder-v2:16b;
+         ollama pull deepseek-r1:8b;
          echo '✅ Model pulled, keeping server running...';
          wait $SERVER_PID
         "

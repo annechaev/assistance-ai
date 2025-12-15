@@ -1,0 +1,13 @@
+{
+  "model": "deepseek-coder",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Отвечай строго на русском языке. Стиль — технический, без эмодзи."
+    },
+    {
+      "role": "user",
+      "content": "%s"
+    }
+  ]
+}
