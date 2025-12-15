@@ -3,11 +3,10 @@ package ru.qa.megagenerator.aiAssistant.items;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.EditorTextField;
 import ru.qa.megagenerator.aiAssistant.utils.form.BubbleUtils;
+import ru.qa.megagenerator.aiAssistant.utils.form.EditorUtils;
 import ru.qa.megagenerator.aiAssistant.utils.form.PsiUtils;
 
 import javax.swing.*;
@@ -19,8 +18,7 @@ import java.util.List;
 
 public class ChatMessagePanel extends JPanel {
 
-    public static List<JPanel> getRows(String messageText, boolean isUser, JComponent parentPanel, Project project,
-                                       int newWidth) {
+    public static List<JPanel> getRows(String messageText, boolean isUser, Project project, int newWidth) {
         List<BubbleMessageItem> messageItems = BubbleUtils.getBubbleMessages(messageText, "code");
         Editor editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
 
@@ -28,9 +26,8 @@ public class ChatMessagePanel extends JPanel {
         messageItems.forEach(item -> {
 
             JPanel block = item.getIsCode()
-                    ? createCodeBubble(item.getMessage(), project, editor, parentPanel)
+                    ? createCodeBubble(item.getMessage(), project)
                     : BubbleUtils.createTextBubble(item.getMessage(), isUser);
-//             ограничение ширины пузыря
             block.setBorder(BorderFactory.createLineBorder(Color.BLUE));
             JPanel rowContainer = new JPanel();
             rowContainer.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -54,14 +51,14 @@ public class ChatMessagePanel extends JPanel {
         return allBlocks;
     }
 
-    private static JPanel createCodeBubble(String codeText, Project project, Editor editor, JComponent parentPanel) {
+    private static JPanel createCodeBubble(String codeText, Project project) {
         JPanel wrapper = new JPanel(new BorderLayout());
         wrapper.setOpaque(false);
         JPanel codePanel = BubbleUtils.createBubblePanel(new Color(0xF5F5F5));
         // === Панель для editor ===
         JPanel editorWrapper = new JPanel(new BorderLayout());
         editorWrapper.setOpaque(false);
-        EditorTextField editorTextField = createJavaEditor(project, codeText);
+        EditorTextField editorTextField = EditorUtils.createJavaEditor(project, codeText);
         editorWrapper.add(editorTextField, BorderLayout.CENTER);
         codePanel.add(editorWrapper, BorderLayout.CENTER);
 
@@ -90,29 +87,5 @@ public class ChatMessagePanel extends JPanel {
 
         wrapper.add(codePanel, BorderLayout.CENTER);
         return wrapper;
-    }
-
-    public static EditorTextField createJavaEditor(Project project, String initialText) {
-        // 1. Получение FileType для Java
-        // FileTypeManager.getInstance().findFileTypeByName("JAVA") - более явный способ
-        // или просто использовать JavaFileType.INSTANCE, если доступно в вашем classpath
-        FileType javaFileType = FileTypeManager.getInstance().getFileTypeByExtension("java");
-
-        if (javaFileType == null) {
-            // Обработка ситуации, если Java FileType не найден
-            // В стандартной IntelliJ IDEA такого не должно происходить
-            javaFileType = FileTypeManager.getInstance().getStdFileType(initialText); // Fallback к обычному тексту
-        }
-
-        // 2. Создание EditorTextField с указанием проекта и FileType
-        // Этот конструктор автоматически настраивает подсветку синтаксиса,
-        // соответствующую указанному типу файла.
-        EditorTextField editorTextField = new EditorTextField(initialText, project, javaFileType);
-
-        // Дополнительные настройки (опционально)
-        editorTextField.setOneLineMode(false); // Многострочный режим
-        // editorTextField.addDocumentListener(...); // Добавление слушателей документа
-
-        return editorTextField;
     }
 }

@@ -1,15 +1,21 @@
 package ru.qa.megagenerator.aiAssistant.form;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import ru.qa.megagenerator.aiAssistant.clients.DeepSeekClient;
+import ru.qa.megagenerator.aiAssistant.clients.dto.AiRequest;
 import ru.qa.megagenerator.aiAssistant.items.MessageListPanel;
 import ru.qa.megagenerator.aiAssistant.utils.form.ContextMenuUtils;
 import ru.qa.megagenerator.aiAssistant.utils.form.TextAreaUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 
 public class SimpleChatForm extends JPanel {
     private JPanel root;
@@ -23,6 +29,7 @@ public class SimpleChatForm extends JPanel {
     private JTextField systemField;
     private JButton systemButton;
     private JLabel systemLabel;
+    private JButton buttonTestStart;
     private Project project;
     private MessageListPanel messagesPanel;
     private JScrollPane messagesScrollPane;
@@ -35,6 +42,17 @@ public class SimpleChatForm extends JPanel {
         setButtons();
         modifyChatPanel();
         ContextMenuUtils.createPopupMenu(inputArea);
+        buttonTestStart.addActionListener(e -> {
+            if(!systemField.getText().isBlank()) {
+                DeepSeekClient client = ApplicationManager.getApplication().getService(DeepSeekClient.class);
+                String content = client.chat(new AiRequest(systemField.getText(), Map.of("temperature", 0.1)))
+                        .content();
+                System.out.println(content);
+            } else {
+                System.out.println("Строка пуста!");
+            }
+
+        });
     }
 
     public JComponent rootPanel() {

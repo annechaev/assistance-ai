@@ -10,12 +10,6 @@ import ru.qa.megagenerator.aiAssistant.form.SimpleChatForm;
 
 public class ChatToolWindowFactory implements ToolWindowFactory {
 
-    public ChatToolWindowFactory() {
-
-        System.out.println("ChatToolWindowFactory loaded");
-
-    }
-
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         SimpleChatForm chatPanel = new SimpleChatForm(project);
