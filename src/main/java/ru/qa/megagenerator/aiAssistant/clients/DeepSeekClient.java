@@ -8,19 +8,18 @@ import ru.qa.megagenerator.aiAssistant.exceptions.AiException;
 import ru.qa.megagenerator.aiAssistant.interfaces.AiClient;
 
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Map;
 
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static com.intellij.microservices.mime.MimeTypes.APPLICATION_JSON;
-import static ru.qa.megagenerator.aiAssistant.utils.common.FileUtils.getContentFromFile;
+import static ru.qa.megagenerator.aiAssistant.constants.CommonConstants.HTTP_CLIENT;
+import static ru.qa.megagenerator.aiAssistant.utils.common.FileUtils.getContentFromResources;
 
 @Service
 public class DeepSeekClient implements AiClient {
 
-    private final HttpClient httpClient = HttpClient.newHttpClient();
     private final String REQUEST_BODY_PATH = "dto/deepseek_request_body.json";
 
     @Override
@@ -37,7 +36,7 @@ public class DeepSeekClient implements AiClient {
                     .header(CONTENT_TYPE, APPLICATION_JSON)
                     .POST(HttpRequest.BodyPublishers.ofString(buildBody(request)))
                     .build();
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             System.out.println("Закончили!");
             return parseResponse(response.body());
         } catch (Exception e) {
@@ -47,7 +46,7 @@ public class DeepSeekClient implements AiClient {
 
     private String buildBody(AiRequest request) {
         // Jackson / Gson
-        return getContentFromFile(REQUEST_BODY_PATH).formatted(request.prompt());
+        return getContentFromResources(REQUEST_BODY_PATH).formatted(request.prompt());
     }
 
     private AiResponse parseResponse(String body) {

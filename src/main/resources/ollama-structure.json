@@ -1,0 +1,33 @@
+{
+  "name": "ollama",
+  "type": "directory",
+  "children": [
+    {
+      "name": "bin",
+      "type": "directory",
+      "children": []
+    },
+    {
+      "name": "ollama-data",
+      "type": "directory",
+      "children": [
+        {
+          "name": "models",
+          "type": "directory",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "docker",
+      "type": "directory",
+      "children": [
+        {
+          "name": "docker-compose-temp.yml",
+          "type": "file",
+          "resourcePath": "/ollama/docker-compose-temp.yml"
+        }
+      ]
+    }
+  ]
+}

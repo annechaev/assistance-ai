@@ -62,8 +62,19 @@ configurations {
     create("externalLibs")
 }
 
+//configurations.all {
+//    exclude(group = "com.fasterxml.jackson.core", module = "jackson-core")
+//    exclude(group = "com.fasterxml.jackson.core", module = "jackson-databind")
+////    exclude(group = "com.fasterxml.jackson.datatype", module = "jackson-datatype-jsr310")
+//    exclude(group = "com.fasterxml.jackson.module", module = "jackson-module-kotlin")
+//}
+
+
 dependencies {
     implementation("org.reflections:reflections:0.10.2")
+//    implementation("com.fasterxml.jackson.core:jackson-core:2.20.1")
+//    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.1")
 }
 
 tasks {
