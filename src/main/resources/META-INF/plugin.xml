@@ -9,7 +9,7 @@
         This is ai assistance for different model
     ]]></description>
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.java</depends>
+
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="MG AI Chat"
                     factoryClass="ru.qa.megagenerator.aiAssistant.toolWindow.ChatToolWindowFactory" anchor="right"/>
@@ -21,6 +21,14 @@
                                  id="ru.qa.megagenerator.aiAssistant.settings.configurable.ModelConfigurable"
                                  instance="ru.qa.megagenerator.aiAssistant.settings.configurable.ModelConfigurable"
                                  displayName="Model"/>
+        <applicationConfigurable parentId="ru.qa.megagenerator.aiAssistant.settings.configurable.CommonListConfigurable"
+                                 id="ru.qa.megagenerator.aiAssistant.settings.configurable.LocalModelConfigurable"
+                                 instance="ru.qa.megagenerator.aiAssistant.settings.configurable.ModelConfigurable"
+                                 displayName="Local"/>
+        <applicationConfigurable parentId="ru.qa.megagenerator.aiAssistant.settings.configurable.CommonListConfigurable"
+                                 id="ru.qa.megagenerator.aiAssistant.settings.configurable.OllamaConfigurable"
+                                 instance="ru.qa.megagenerator.aiAssistant.settings.configurable.OllamaConfigurable"
+                                 displayName="Ollama"/>
         <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.aiModels.ChatGPTModel"/>
         <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.aiModels.DeepSeekModel"/>
         <applicationService serviceImplementation="ru.qa.megagenerator.aiAssistant.clients.DeepSeekClient"/>

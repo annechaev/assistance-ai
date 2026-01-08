@@ -1,11 +1,17 @@
 package ru.qa.megagenerator.aiAssistant.constants;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.reflections.Reflections;
 import ru.qa.megagenerator.aiAssistant.annotations.ConfigurablePage;
 import ru.qa.megagenerator.aiAssistant.interfaces.AiClient;
 import ru.qa.megagenerator.aiAssistant.interfaces.AiModelImpl;
 import ru.qa.megagenerator.aiAssistant.utils.common.ReflectUtils;
 
+import java.net.http.HttpClient;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -15,6 +21,11 @@ public class CommonConstants {
     public static String pack = Arrays.stream(ConfigurablePage.class.getPackageName().split("\\."))
             .limit(3).collect(Collectors.joining("."));
     public static Reflections reflections = new Reflections(pack);
+    public static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
+    public static final ObjectMapper MAPPER = JsonMapper.builder().addModule(new JavaTimeModule())
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).build();
+    public static final String TOKEN = "";
+
     private static List<AiModelImpl> aiModels;
     private static List<AiClient> aiClients;
 

@@ -17,7 +17,7 @@ import static ru.qa.megagenerator.aiAssistant.utils.common.ReflectUtils.getAnnot
 
 public class CommonListConfigurable implements SearchableConfigurable, Configurable.Composite {
     private JPanel panel;
-    public static final String NAME = "Mega Generator";
+    public static final String NAME = "MG Ai assistant";
     private List<Configurable> pageList = new ArrayList<>();
 
     @Nls(capitalization = Nls.Capitalization.Title)
